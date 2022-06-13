@@ -1,6 +1,7 @@
 package com.zip.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,9 @@ public class ZipValidatorController {
 
     @Autowired
     private ZipValidatorService zipValidatorService;
+    
+    @Autowired
+    private ServletWebServerApplicationContext server;
 
     @GetMapping("/{zipCode}")
     public ResponseEntity<Boolean> zipValidator(@PathVariable("zipCode") String zipCode) {
@@ -26,6 +30,11 @@ public class ZipValidatorController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    @GetMapping("/port")
+    public String serverPort() {
+        return String.valueOf(server.getWebServer().getPort());
     }
 
 }
