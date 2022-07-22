@@ -28,7 +28,7 @@ public class ZipValidatorController {
     public ResponseEntity<Boolean> zipValidator(@PathVariable("zipCode") String zipCode) {
 
         try {
-            LOGGER.info("Validatin ZIP code: {} ", zipCode);
+            LOGGER.info("Validating ZIP code: {} ", zipCode);
             Boolean isValidZipCode = zipValidatorService.isValid(zipCode);
             return new ResponseEntity<>(isValidZipCode, HttpStatus.OK);
         } catch (RuntimeException runtimeException) {
